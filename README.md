@@ -9,3 +9,68 @@ Link : https://medium.com/modulotech/how-to-sign-an-unsigned-apk-using-command-l
 ### 3) Gradle을 사용하여 릴리스 서명 apk 파일을 만드는 방법은 무엇입니까?
 Link : https://lottogame.tistory.com/550
 
+## 2. Gradle Release 빌드 명령 
+ ./gradlew assembleRelease
+
+# <젠킨스 도커 페이지> 
+https://hub.docker.com/_/jenkins
+
+## 1. 젠킨스 이미지 다운로드
+docker pull jenkins/jenkins
+## 2. 젠킨스 컨테이너 생성 
+- docker run --name myjenkins -p 8080:8080 -p 50000:50000 -v /var/jenkins_home jenkins/jenkins
+
+로그에서 부분 확인
+
+Jenkins initial setup is required. An admin user has been created and a password generated.
+Please use the following password to proceed to installation:
+
+60748e759d1b477ca2cf9ba860484615
+젠킨스 처음 로그인 페스워드임 
+
+## 3. docker ps -a 
+컨테이너 조회
+
+## 4. 젠킨스 실행 
+
+
+## 5. localhost:8080 
+-> 비번 입력 : 60748e759d1b477ca2cf9ba860484615
+
+
+# <Android sdk install>
+## 1. 젠킨스 로컬 접속 
+ docker exec -it -u 0 myjenkins /bin/bash
+ 
+## 2. Android-sdk 기본설치
+apt update
+apt install android-sdk
+
+## 3. 빌드에 필요한 Android-SDK tool 추가설치
+wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+mv sdk-tools-linux-4333796.zip /usr/lib/android-sdk/sdk-tools-linux-4333796.zip
+cd /usr/lib/android-sdk/
+unzip sdk-tools-linux-4333796.zip
+
+## 4. sdkmanager로 필요한 tool 설치
+cd tools/bin
+./sdkmanager --list
+./sdkmanager "build-tools;30.0.2" "build-tools;30.0.2" "platforms;android-30"
+
+## 5. Jenkins 환경변수에 ANDROID_HOME path 등록
+ - Jenkins 관리 > 시스템 설정 > Global properties > Environment variables
+ - 이름: ANDROID_HOME, 값: /usr/lib/android-sdk
+
+
+# <GitHub 빌드>
+## 1. github 프로젝트 연동.
+https://jojoldu.tistory.com/139
+## 2. Android 빌드 
+Build
+ ->  Use Gradle Wrapper
+ ->  Tasks : assembleRelease
+
+<슬랙연동>
+https://dnight.tistory.com/entry/Jenkins-Slack-%EC%95%8C%EB%A6%BC-%EC%97%B0%EB%8F%99
+
+
