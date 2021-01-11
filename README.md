@@ -12,8 +12,8 @@ Link : https://lottogame.tistory.com/550
 ## 2. Gradle Release 빌드 명령 
  ./gradlew assembleRelease
 
-# <젠킨스 도커 페이지> 
-https://hub.docker.com/_/jenkins
+# <젠킨스 도커 설치> 
+Link : https://hub.docker.com/_/jenkins
 
 ## 1. 젠킨스 이미지 다운로드
 docker pull jenkins/jenkins
