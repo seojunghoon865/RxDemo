@@ -18,7 +18,18 @@ Link : https://hub.docker.com/_/jenkins
 ## 1. 젠킨스 이미지 다운로드
 docker pull jenkins/jenkins
 ## 2. 젠킨스 컨테이너 생성 
-- docker run --name myjenkins -p 8080:8080 -p 50000:50000 -v /var/jenkins_home jenkins/jenkins
+docker run --name jenkinsDemo -p 8080:8080 -p 50000:50000 -v /Users/seojunghoon/jenkins_backup/backup_test:/var/jenkins_home jenkins/jenkins
+
+### 1) jenkinsDemo : 컨테이너 이름 
+### 2) /Users/seojunghoon/jenkins_backup/backup_test
+jenkins사용중에 만들어진 데이터를 로컬디스크에 저장하도록해서 jenkins용 docker를 재시작하더라도 데이터가 남아있게 하기 위한 폴더임.
+다른 곳(다른 pc 등 )에서 사용시 해당 폴더 내용만 있으면 현재 사용중인 Jenkins 가 그대로 구성됨.
+위 명령 사용하기전에 해당 폴더 생성 해야함. 
+<참고>
+link : https://arisu1000.tistory.com/27784
+
+### 3) jenkins/jenkins
+젠킨스 이미지명 
 
 로그에서 부분 확인
 
@@ -67,8 +78,15 @@ cd tools/bin
 https://jojoldu.tistory.com/139
 ## 2. Android 빌드 
 Build
- ->  Use Gradle Wrapper
- ->  Tasks : assembleRelease
+    -> Invoke Gradle script
+        ->  Use Gradle Wrapper
+        ->  Tasks : assembleRelease
+
+빌드 후 조치
+: 아래 처럼 만들어야 apk가 생성됨. 
+Link : https://kkensu.tistory.com/59
+    -> Archive the artifacts
+ 	    Files to archive : **/*.apk
 
 <슬랙연동>
 https://dnight.tistory.com/entry/Jenkins-Slack-%EC%95%8C%EB%A6%BC-%EC%97%B0%EB%8F%99
