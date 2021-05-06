@@ -20,18 +20,29 @@
 
 
 
+
+    <Button
+        android:id="@+id/btnMap"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Map"
+        android:textAllCaps="false"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSubActivity"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/btnSubActivity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Sub Activity"
+        android:text="Sub"
         android:textAllCaps="false"
 
         android:layout_marginStart="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnFr1"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/btnMap" />
 
     <Button
         android:id="@+id/btnFr1"
@@ -60,7 +71,7 @@
         android:id="@+id/btnRequest"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="request"
+        android:text="REQ"
         app:layout_constraintBottom_toBottomOf="@+id/btnSubActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnFr2"

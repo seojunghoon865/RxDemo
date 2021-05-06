@@ -83,6 +83,11 @@ class HiltMainActivity : AppCompatActivity() {
             hiltMainViewModel.getUserProfile("inseo@seo.com")
         }
 
+        btnMap.setOnClickListener {
+            val intent = Intent(this,NaverMapActivity::class.java)
+            startActivity(intent)
+        }
+
         compositeDisposable.add(subscribe)
     }
 
