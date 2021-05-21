@@ -11,12 +11,14 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker
+import androidx.leanback.animation.LogDecelerateInterpolator
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.CameraUpdate.*
 import com.naver.maps.map.util.FusedLocationSource
 import com.seo.rxdemo.R
 import kotlinx.android.synthetic.main.activity_naver_map.*
+import java.util.*
 
 class NaverMapActivity : AppCompatActivity(), OnMapReadyCallback , LocationListener {
 
@@ -35,6 +37,8 @@ class NaverMapActivity : AppCompatActivity(), OnMapReadyCallback , LocationListe
     var naverMap:NaverMap? = null
     private lateinit var locationSource: FusedLocationSource
     private var locationManager: LocationManager? = null
+    private var tempLocation:Location? = null
+
 
 
 
@@ -101,6 +105,33 @@ class NaverMapActivity : AppCompatActivity(), OnMapReadyCallback , LocationListe
 
         }
 
+        val calender = Calendar.getInstance()
+
+        // 6월달
+        calender.set(2021,6-1,1)
+        val monthTemp = calender.get(Calendar.MONTH) + 1
+        //calender.set(Calendar.DATE,1)
+        val dayofWeek = calender.get(Calendar.DAY_OF_WEEK)
+        val maxDayOfMonth = calender.getActualMaximum(Calendar.DAY_OF_MONTH)
+
+
+
+
+        Log.d(TAG, "onCreate: calender : ${calender.toString()}")
+        Log.d(TAG, "onCreate: monthTemp = ${monthTemp}")
+        Log.d(TAG, "onCreate: dayofWeek : ${dayofWeek.toString()}")
+        Log.d(TAG, "onCreate: maxDayOfMonth = ${maxDayOfMonth}")
+
+        when(dayofWeek){
+            Calendar.SUNDAY -> Log.d(TAG, "onCreate: 일요일")
+            Calendar.MONDAY -> Log.d(TAG, "onCreate: 월요일")
+            Calendar.TUESDAY-> Log.d(TAG, "onCreate: 화요일")
+            Calendar.WEDNESDAY -> Log.d(TAG, "onCreate: 수요일")
+            Calendar.THURSDAY -> Log.d(TAG, "onCreate: 목요일")
+            Calendar.FEBRUARY -> Log.d(TAG, "onCreate: 금요일")
+            Calendar.SATURDAY -> Log.d(TAG, "onCreate: 토요일")
+        }
+
 
     }
 
@@ -160,6 +191,8 @@ class NaverMapActivity : AppCompatActivity(), OnMapReadyCallback , LocationListe
             Log.d(TAG, "onLocationChanged: Location = null")
             return
         }
+        tempLocation = location
+
 
         Log.d(TAG, "onLocationChanged: Location = ${location.toString()}")
 
@@ -180,6 +213,13 @@ class NaverMapActivity : AppCompatActivity(), OnMapReadyCallback , LocationListe
         naverMap = map
 
         Log.d(TAG, "onMapReady: locationSource = ${locationSource.toString()}")
+
+        tempLocation?.let {
+            val cameraUpdate = CameraUpdate.scrollTo(LatLng(it.latitude, it.longitude))
+            naverMap?.moveCamera(cameraUpdate)
+        }
+
+
         naverMap?.locationSource = locationSource
         /// 카메라 이동시 이벤트
         naverMap?.addOnCameraChangeListener {reason, animated ->
