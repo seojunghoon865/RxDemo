@@ -20,7 +20,7 @@ class SettingFragment : Fragment(R.layout.fragment_setting) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "SettingFragment::onCreate: =====> ")
-        Log.d(TAG, "onCreate: ")
+        Log.d(TAG, "onCreate: 111 ")
     }
 
 
